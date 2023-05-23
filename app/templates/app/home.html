@@ -1,0 +1,139 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $('.slider').bxSlider({
+          mode: 'fade',//horizontal, vertical, fade
+          auto: true,
+          pause: 2000
+      });
+    });
+</script>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="slider"> 
+    
+    <div>
+        <a href="{% url 'productos' %}">
+            <img src="{% static 'app/img/banner/banner4.png' %}" alt="">
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'productos' %}">
+            <img src="{% static 'app/img/banner/banner5.png' %}" alt="">
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'productos' %}">
+            <img src="{% static 'app/img/banner/banner6.png' %}" alt="">
+        </a>
+    </div>
+</div>
+
+
+<h2>Productos</h2>
+<div class="productos">
+
+<div class="producto">
+
+    <div class="contenedor_producto">
+
+        <img src="{% static 'app/img/guitarra.png' %}" alt="imagen producto">
+        <div class="detalle">
+            <p>Nombre: {{ productos.producto1.nombre }}</p>
+            <p>Precio: {{ productos.producto1.precio }}</p>
+            <form action="{% url 'agregar_al_carrito' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="producto_id" value="producto1">
+                <input type="hidden" name="nombre" value="{{ productos.producto1.nombre }}">
+                <input type="hidden" name="precio" value="{{ productos.producto1.precio }}">
+                <input type="submit" value="Agregar al carrito" class="btn-agregar">
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="producto">
+
+    <div class="contenedor_producto">
+
+        <img src="{% static 'app/img/bateria.png' %}" alt="imagen producto">
+        <div class="detalle">
+            <p>Nombre: {{ productos.producto2.nombre }}</p>
+            <p>Precio: {{ productos.producto2.precio }}</p>
+            <form action="{% url 'agregar_al_carrito' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="producto_id" value="producto2">
+                <input type="hidden" name="nombre" value="{{ productos.producto2.nombre }}">
+                <input type="hidden" name="precio" value="{{ productos.producto2.precio }}">
+                <input type="submit" value="Agregar al carrito" class="btn-agregar">
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="producto">
+
+    <div class="contenedor_producto">
+
+        <img src="{% static 'app/img/teclado.png' %}" alt="imagen producto">
+        <div class="detalle">
+            <p>Nombre: {{ productos.producto3.nombre }}</p>
+            <p>Precio: {{ productos.producto3.precio }}</p>
+            <form action="{% url 'agregar_al_carrito' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="producto_id" value="producto3">
+                <input type="hidden" name="nombre" value="{{ productos.producto3.nombre }}">
+                <input type="hidden" name="precio" value="{{ productos.producto3.precio }}">
+                <input type="submit" value="Agregar al carrito" class="btn-agregar">
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="producto">
+
+    <div class="contenedor_producto">
+
+        <img src="{% static 'app/img/bajo.png' %}" alt="imagen producto">
+        <div class="detalle">
+            <p>Nombre: {{ productos.producto4.nombre }}</p>
+            <p>Precio: {{ productos.producto4.precio }}</p>
+            <form action="{% url 'agregar_al_carrito' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="producto_id" value="producto4">
+                <input type="hidden" name="nombre" value="{{ productos.producto4.nombre }}">
+                <input type="hidden" name="precio" value="{{ productos.producto4.precio }}">
+                <input type="submit" value="Agregar al carrito" class="btn-agregar">
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<br>
+<br>
+<br>
+
+{% endblock %}

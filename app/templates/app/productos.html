@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicPro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,700;1,400;1,700&family=Open+Sans:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
+    {% load static %}
+    {% block css %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'app/css/estilos.css' %}">
+    
+</head>
+<header id="header" >
+    <img class="menu" src="{% static 'app/img/menuiconwhite.png' %}" alt="menu" id="menu">
+    <div class="contenedor_logo">
+        <a href="{% url 'home' %}">   
+        <img  class="logo"  src="{% static 'app/img/musicprologo.png' %}" alt="logo">
+    </a>
+    </div>
+
+   
+
+
+    <div>
+        
+    </div>
+
+
+
+</header>
+
+<body>
+    
+<br>
+    <h1>Productos</h1>
+    <br>
+
+
+ 
+<div class="productos">
+    
+
+          
+           
+
+    <div class="producto">
+        <div class="contenedor_producto">
+            <img src="{% static 'app/img/guitarra.png' %}" alt="imagen producto">
+            <div class="detalle">
+                <p>Nombre: {{ productos.producto1.nombre }}</p>
+                <p>Precio: {{ productos.producto1.precio }}</p>
+                <form action="{% url 'agregar_al_carrito' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="producto_id" value="producto1">
+                    <input type="hidden" name="nombre" value="{{ productos.producto1.nombre }}">
+                    <input type="hidden" name="precio" value="{{ productos.producto1.precio }}">
+                    <input type="submit" value="Agregar al carrito" class="btn-agregar">
+                </form>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="producto">
+        <div class="contenedor_producto">
+            <img src="{% static 'app/img/bateria.png' %}" alt="imagen producto">
+            <div class="detalle">
+                <p>Nombre: {{ productos.producto2.nombre }}</p>
+                <p>Precio: {{ productos.producto2.precio }}</p>
+                <form action="{% url 'agregar_al_carrito' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="producto_id" value="producto2">
+                    <input type="hidden" name="nombre" value="{{ productos.producto2.nombre }}">
+                    <input type="hidden" name="precio" value="{{ productos.producto2.precio }}">
+                    <input type="submit" value="Agregar al carrito" class="btn-agregar">
+                </form>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="producto">
+        <div class="contenedor_producto">
+            <img src="{% static 'app/img/teclado.png' %}" alt="imagen producto">
+            <div class="detalle">
+                <p>Nombre: {{ productos.producto3.nombre }}</p>
+                <p>Precio: {{ productos.producto3.precio }}</p>
+                <form action="{% url 'agregar_al_carrito' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="producto_id" value="producto3>
+                    <input type="hidden" name="nombre" value="{{ productos.producto3.nombre }}">
+                    <input type="hidden" name="precio" value="{{ productos.producto3.precio }}">
+                    <input type="submit" value="Agregar al carrito" class="btn-agregar">
+                </form>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="producto">
+        <div class="contenedor_producto">
+            <img src="{% static 'app/img/bajo.png' %}" alt="imagen producto">
+            <div class="detalle">
+                <p>Nombre: {{ productos.producto4.nombre }}</p>
+                <p>Precio: {{ productos.producto4.precio }}</p>
+                <form action="{% url 'agregar_al_carrito' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="producto_id" value="producto4">
+                    <input type="hidden" name="nombre" value="{{ productos.producto4.nombre }}">
+                    <input type="hidden" name="precio" value="{{ productos.producto4.precio }}">
+                    <input type="submit" value="Agregar al carrito" class="btn-agregar">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+    <footer class="FootP" >
+        <div class="marcas">
+            <img src="{% static 'app/img/footer/sdlogo.png' %}" alt="soundcloud">
+            <img src="{% static 'app/img/footer/youtube.png' %}" alt="youtube">
+            <img src="{% static 'app/img/footer/spotify.png' %}" alt="spotify">
+            <img src="{% static 'app/img/footer/amazon.png' %}" alt="amazon">
+            <img src="{% static 'app/img/footer/applemusic.png' %}" alt="apple">
+        </div>
+        <div class="logo_footer">
+            <img src="{% static 'app/img/musicprologo.png' %}" alt="logo" >
+        </div>
+    </footer>
+
+
+
+
+    <script src="{% static 'js/productos.js' %}"></script>
+
+
+</body>
+</html>
+
