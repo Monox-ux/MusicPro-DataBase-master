@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'app',
     'bootstrap4',
+    
     
     
 ]
@@ -129,4 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PAYPAL_CLIENT_ID = "Acjjcwk-3TC3Vx-CFpSmX01guj0pTxOxxRKgJKHLramMEocFp_Gt9vq92C-6De9JewaOCf6-13DYXGeY"
 PAYPAL_CLIENT_SECRET = "ENXhwbzdbi6rBJ_LCfDe2IoIQ-2xJNR_SuZZKUOhXSEtfJzDiUfcvi2pKpkfpZ2ttQ_h15Vg3-hEY9PG"
 
+REST_FRAMEWORK  = {
 
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}

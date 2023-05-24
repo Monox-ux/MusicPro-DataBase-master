@@ -4,3 +4,14 @@ pip install pyrebase4
 pip uninstall requests-toolbelt
 pip install requests-toolbelt==0.10.1
 pip install firebase-admin
+pip install djangorestframework
+
+
+usuario
+monox
+
+correo
+es.devia@duocuc.cl
+
+Contraseña
+hola12345

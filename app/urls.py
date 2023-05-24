@@ -1,9 +1,12 @@
 from django.urls import path
 from . import views
-from .views import home, contacto, galeria, productos, carrito, limpiar_carrito, checkout
+from .views import home, contacto, galeria, productos, carrito, limpiar_carrito, checkout, ProductoViewSet
+from rest_framework import routers
+from django.urls import include, path
+from app import views
 
-
-
+router = routers.DefaultRouter()
+router.register(r'productoss', ProductoViewSet)
 
 
 urlpatterns = [
@@ -16,6 +19,6 @@ urlpatterns = [
     path('limpiar-carrito/', limpiar_carrito, name='limpiar_carrito'),
     path('checkout/', checkout, name='checkout'),
 
- 
-   
+    path('', include(router.urls)),
+
 ]

@@ -6,9 +6,6 @@ from firebase_admin import db
 from django.templatetags.static import static
 from django.contrib import messages
 
-
-
-
 config = {
 
     'apiKey': "AIzaSyBYxVbhpJsonMJ_mCIKN9apyMF1FgvwuAo",
@@ -25,10 +22,7 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 database = firebase.database()
 
-
-
 # Create your views here.
-
 
 def contacto(request):
     return render(request, 'app/contacto.html' )
@@ -63,7 +57,6 @@ def home(request):
         'productos': productos_data
     })
 
-
 def productos(request):
     productos_data = {
         'producto1': {
@@ -92,31 +85,6 @@ def productos(request):
         'productos': productos_data
     })
 
-def carrito(request):
-    productos_carrito = request.session.get('carrito', [])
-    
-    total_precio = 0
-    
-    for producto in productos_carrito:
-        nombre = producto['nombre']
-        precio = producto['precio']
-        imagen = f'app/img/{nombre}.png'  # Ajusta la ruta de la imagen según tu estructura de carpetas
-        producto['imagen'] = imagen
-        
-        # Eliminar símbolos de moneda y caracteres no numéricos del precio
-        precio = precio.replace('$', '').replace(',', '').replace('.', '')
-        
-        # Convertir el precio a float
-        precio_float = float(precio)
-        
-        # Sumar el precio al total
-        total_precio += precio_float
-    
-    return render(request, 'app/carrito.html', {
-        'productos_carrito': productos_carrito,
-        'total_precio': total_precio
-    })
-
 def agregar_al_carrito(request):
     if request.method == 'POST':
         producto_id = request.POST.get('producto_id')
@@ -141,11 +109,9 @@ def agregar_al_carrito(request):
         
         return redirect('carrito')
 
-
 def limpiar_carrito(request):
     request.session['carrito'] = []  # Vacía la lista de productos del carrito en la sesión
     return redirect('carrito')  # Redirige al carrito después de limpiarlo
-
 
 def carrito(request):
     productos_carrito = request.session.get('carrito', [])
@@ -172,7 +138,6 @@ def carrito(request):
         'total_precio': total_precio
     })
 
-
 import paypalrestsdk
 from django.shortcuts import render
 from django.conf import settings
@@ -184,9 +149,16 @@ paypalrestsdk.configure({
 })
 
 def checkout(request):
-    # Lógica para obtener el monto total de la compra y otros detalles
-
-    # Crear el objeto de pago
+    productos_carrito = request.session.get('carrito', [])
+    
+    total_precio = 0
+    
+    for producto in productos_carrito:
+        precio = producto['precio']
+        precio = precio.replace('$', '').replace(',', '').replace('.', '')
+        precio_float = float(precio)
+        total_precio += precio_float
+        
     payment = paypalrestsdk.Payment({
         "intent": "sale",
         "payer": {
@@ -198,22 +170,32 @@ def checkout(request):
         },
         "transactions": [{
             "amount": {
-                "total": "10.00",  # Reemplaza con el monto total de la compra
-                "currency": "USD"  # Reemplaza con la moneda correspondiente
+                "total": str(total_precio),  # Use the total_precio variable as the total amount
+                "currency": "USD"  # Replace with the appropriate currency
             },
             "description": "Descripción de la compra"
         }]
     })
 
-    # Crear el pago en PayPal
     if payment.create():
-        # Redirigir al usuario a la página de PayPal para completar el pago
         for link in payment.links:
             if link.method == "REDIRECT":
                 redirect_url = str(link.href)
                 return redirect(redirect_url)
     else:
-        # Mostrar un mensaje de error en caso de fallo en la creación del pago
         print(payment.error)
 
     return render(request, "checkout.html")
+
+
+from rest_framework import viewsets
+from .models import Producto
+from app.serializers import ProductoSerializer
+
+
+# Create your views here.
+
+
+class ProductoViewSet(viewsets.ModelViewSet):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
