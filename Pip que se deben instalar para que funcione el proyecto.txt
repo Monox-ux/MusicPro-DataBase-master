@@ -1,10 +1,11 @@
-pip install paypalrestsdk
-pip install bootstrap4
-pip install pyrebase4
-pip uninstall requests-toolbelt
+pip install paypalrestsdk 
+pip install bootstrap4  
+pip install pyrebase4 
+pip uninstall requests-toolbelt 
 pip install requests-toolbelt==0.10.1
 pip install firebase-admin
 pip install djangorestframework
+pip install coreapi-cli
 
 
 usuario
